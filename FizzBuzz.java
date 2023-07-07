@@ -2,29 +2,16 @@ class FizzBuzz {
     public static void main(String[] args) {
         for (int num = 1; num <= 100; num++) {
             StringBuilder line = new StringBuilder("");
-            if (num % 3 == 0) {
-                line.append("Fizz");
-            } 
-            if (num % 5 == 0){
-                line.append("Buzz");
-            } 
-            if (num % 7 == 0){
-                line.append("Rizz");
-            } 
-            if (num % 11 == 0){
-                line.append("Jazz");
-            }
-            if (120 % num == 0) {
-                line.append("Dizz");
-            }
-            if (isPrime(num)) {
-                if (isPrizz(num)) {
-                    line.append("Prizz");
-                }
-            }
-            if (line.length() == 0) {
-                line.append(num);
-            }
+
+            line.append(num % 3 == 0 ? "Fizz" : "");
+            line.append(num % 5 == 0 ? "Buzz" : "");
+            line.append(num % 7 == 0 ? "Rizz" : "");
+            line.append(num % 11 == 0 ? "Jazz" : "");
+            line.append(120 % num == 0 ? "Dizz" : "");
+            line.append(isPrime(num) ? (isPrizz(num) ? "Prizz" : "") : "");
+
+            line.append(line.length() == 0 ? num : "");
+
             System.out.println(line.toString());
         }
     }
