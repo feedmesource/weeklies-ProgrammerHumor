@@ -14,6 +14,9 @@ class FizzBuzz {
             if (num % 11 == 0){
                 line.append("Jazz");
             }
+            if (120 % num == 0) {
+                line.append("Dizz");
+            }
             if (isPrime(num)) {
                 if (isPrizz(num)) {
                     line.append("Prizz");
@@ -38,13 +41,13 @@ class FizzBuzz {
     }
 
     static boolean isPrizz(int number) {
-        int check = number + 1;
-        while (!isPrime(check)) {
-            if (check % 7 == 0 || check % 11 == 0) {
+        do {
+            number++;
+            if (number % 7 == 0 || number % 11 == 0) {
                 return true;
             }
-            check++;
-        }
+        } while (!isPrime(number));
+
         return false;
     }
 }
