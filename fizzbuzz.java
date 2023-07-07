@@ -7,6 +7,12 @@ class fizzbuzz {
             } 
             if (i % 5 == 0){
                 line.append("Buzz");
+            } 
+            if (i % 7 == 0){
+                line.append("Rizz");
+            } 
+            if (i % 11 == 0){
+                line.append("Jazz");
             }
             if (line.length() == 0) {
                 line.append(i);
