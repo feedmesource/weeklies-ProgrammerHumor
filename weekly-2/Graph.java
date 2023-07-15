@@ -56,4 +56,11 @@ public class Graph {
         }
         return null;
     }
+
+    Node getNodeByChar(String charToCheck) {
+        for (Node node : this.nodes) {
+            if (node.getCharName().equals(charToCheck)) return node;
+        }
+        return null;
+    }
 }

@@ -3,7 +3,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Map.Entry;
 
 public class GraphExercise {
 
@@ -21,11 +20,14 @@ public class GraphExercise {
         // }
 
         GraphExercise exercise = new GraphExercise();
-        int easyAnswer = exercise.difficultyEasy(exampleGraph, new int[]{1, 3});
+        int easyAnswer = exercise.difficultyEasy(exampleGraph, new String[]{"B", "D"});
         System.out.println(easyAnswer);
 
         long endTime = System.currentTimeMillis(); // end timer
         System.out.println("That took " + (endTime - startTime) + " milliseconds"); // timer result
+
+        // long endTime2 = System.currentTimeMillis(); // end timer 2
+        // System.out.println("That took " + (endTime2 - endTime) + " milliseconds"); // timer result
     }
 
     private static Graph createExampleGraph() {
@@ -39,18 +41,16 @@ public class GraphExercise {
         return new Graph(graphAsArray);
     }
 
-    public int difficultyEasy(Graph graph, int[] startAndEnd) { // TODO: make ints into str: 1-a, 26-z
+    public int difficultyEasy(Graph graph, String[] startAndEnd) { // TODO: make ints into str: 1-a, 26-z
         nodeList = graph.getNodes();
-        Node sourceNode = graph.getNodeByID(startAndEnd[0]);
-        Node targetNode = graph.getNodeByID(startAndEnd[1]);
+        Node sourceNode = graph.getNodeByChar(startAndEnd[0]);
+        Node targetNode = graph.getNodeByChar(startAndEnd[1]);
         Map<Node, Double> shortestDistances = Dijkstra(nodeList, sourceNode);
         Double distanceWeNeed = shortestDistances.get(targetNode);
         return distanceWeNeed.intValue();
     }
 
     public Map<Node, Double> Dijkstra (List<Node> nodeList, Node sourceNode) {
-        // int sourceNodeID = Integer.valueOf(startAndEnd[0]);
-        // Node sourceNode = exampleGraph.getNodeByID(sourceNodeID);
         Set<Node> usedNodes = new HashSet<>();
         Map<Node, Double> distances = new HashMap<>();
 
@@ -65,19 +65,16 @@ public class GraphExercise {
         while (nodeList.size() > 0) {
             Node smallest = getSmallest(nodeList, usedNodes, distances);
             nodeList.remove(smallest);
-            
-            if (smallest != null) { // do I even need this anymore
-                usedNodes.add(smallest);
-                Map<Node, Integer> neighbours = smallest.getDistances();
-                for (Node neighbour : neighbours.keySet()) {
-                    Double newValue = distances.get(smallest) + smallest.getDistance(neighbour);
-                    if (newValue < distances.get(neighbour)) {
-                        distances.put(neighbour, newValue);
-                    }
-                }
-            } 
-        }
+            usedNodes.add(smallest);
 
+            Map<Node, Integer> neighbours = smallest.getDistances();
+            for (Node neighbour : neighbours.keySet()) {
+                Double newValue = distances.get(smallest) + smallest.getDistance(neighbour);
+                if (newValue < distances.get(neighbour)) {
+                    distances.put(neighbour, newValue);
+                }
+            }
+        }
 
         // // for printing out distances
         // for (Map.Entry<Node, Double> entry : distances.entrySet()) {
