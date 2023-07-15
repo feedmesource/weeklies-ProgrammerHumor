@@ -31,8 +31,8 @@ public class GraphExercise {
         // GraphExercise exercise = new GraphExercise();
         List<Object> intermediateAnswer = exercise.difficultyIntermediate(exampleGraph, new String[]{"B", "D"});
 
-        System.out.println(intermediateAnswer.get(0));
-        System.out.println(intermediateAnswer.get(1));
+        System.out.println(intermediateAnswer.get(0)); // nodes on the shortest path 
+        System.out.println(intermediateAnswer.get(1)); // shortest distance length
 
         long endTime2 = System.currentTimeMillis(); // end timer 2
         System.out.println("That took " + (endTime2 - endTime) + " milliseconds"); // timer result 2
@@ -68,12 +68,13 @@ public class GraphExercise {
 
         StringBuilder sb = new StringBuilder();
 
+        // Add pathway starting from back to front
         Node currentNode = targetNode;
         while (currentNode.getPathFrom() != null) {
             sb.insert(0, "," + currentNode.getCharName());
             currentNode = currentNode.getPathFrom();
         }
-        sb.delete(0, 1);
+        sb.insert(0, currentNode.getCharName()); // insert current node too
 
         String nodesTravelled = sb.toString();
 
@@ -141,12 +142,6 @@ public class GraphExercise {
                 }
             }
         }
-
-        // // for printing out distances
-        // for (Map.Entry<Node, Double> entry : distances.entrySet()) {
-        //     System.out.println(entry.getKey().getId() + " " +  entry.getValue());
-        // }
-        
         return distances;
     }
 
