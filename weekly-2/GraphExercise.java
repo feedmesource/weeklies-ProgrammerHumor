@@ -25,9 +25,6 @@ public class GraphExercise {
 
         long endTime = System.currentTimeMillis(); // end timer
         System.out.println("That took " + (endTime - startTime) + " milliseconds"); // timer result
-
-        // long endTime2 = System.currentTimeMillis(); // end timer 2
-        // System.out.println("That took " + (endTime2 - endTime) + " milliseconds"); // timer result
     }
 
     private static Graph createExampleGraph() {
@@ -41,7 +38,7 @@ public class GraphExercise {
         return new Graph(graphAsArray);
     }
 
-    public int difficultyEasy(Graph graph, String[] startAndEnd) { // TODO: make ints into str: 1-a, 26-z
+    public int difficultyEasy(Graph graph, String[] startAndEnd) {
         nodeList = graph.getNodes();
         Node sourceNode = graph.getNodeByChar(startAndEnd[0]);
         Node targetNode = graph.getNodeByChar(startAndEnd[1]);

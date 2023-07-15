@@ -6,7 +6,7 @@ public class Node {
     private String charName;
     private int id;
     private Map<Node, Integer> distances = new HashMap<>();
-    
+
     public Node(int id) {
         this.id = id;
         this.charName = toAlphabetic(id);
