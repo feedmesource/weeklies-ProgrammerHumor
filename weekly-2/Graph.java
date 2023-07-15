@@ -47,7 +47,7 @@ public class Graph {
 
     Node getNodeByID(int idToCheck) {
         for (Node node : this.nodes) {
-            if (node.getId == idToCheck) return node;
+            if (node.getId() == idToCheck) return node;
         }
         return null;
     }

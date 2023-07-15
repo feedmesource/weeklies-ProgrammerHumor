@@ -6,9 +6,6 @@ public class Node {
     private int id;
     private Map<Node, Integer> distances = new HashMap<>();
     
-    public static void main(String[] args) {    
-    }
-    
     public Node(int id) {
         this.id = id;
     }
