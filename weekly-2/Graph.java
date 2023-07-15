@@ -10,6 +10,10 @@ public class Graph {
         int originalNodeID = 0;
         for (int[] row : graphArray) {
             for (int distance : row) {
+                if (distance <= 0) {
+                    originalNodeID++;
+                    continue;
+                }
                 if (!checkIfNodeInNodesList(originalNodeID)) {
                     Node originalNode = new Node(originalNodeID);
                     nodes.add(originalNode);
@@ -17,6 +21,7 @@ public class Graph {
                     Node receivingNode;
                     if (!checkIfNodeInNodesList(receivingNodeID)) {
                         receivingNode = new Node(receivingNodeID);
+                        nodes.add(receivingNode);
                     } else {
                         receivingNode = getNodeByID(receivingNodeID);
                     }
