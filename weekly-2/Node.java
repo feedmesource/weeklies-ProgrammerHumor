@@ -19,6 +19,10 @@ public class Node {
         return id;
     }
 
+    public Map<Node, Integer> getDistances() {
+        return distances;
+    }
+
     public int getDistance (Node node) {
         return distances.get(node);
     }
