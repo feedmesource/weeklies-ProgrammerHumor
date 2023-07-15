@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +26,16 @@ public class GraphExercise {
 
         long endTime = System.currentTimeMillis(); // end timer
         System.out.println("That took " + (endTime - startTime) + " milliseconds"); // timer result
+
+        exampleGraph = createExampleGraph();
+        // GraphExercise exercise = new GraphExercise();
+        List<Object> intermediateAnswer = exercise.difficultyIntermediate(exampleGraph, new String[]{"B", "D"});
+
+        System.out.println(intermediateAnswer.get(0));
+        System.out.println(intermediateAnswer.get(1));
+
+        long endTime2 = System.currentTimeMillis(); // end timer 2
+        System.out.println("That took " + (endTime2 - endTime) + " milliseconds"); // timer result 2
     }
 
     private static Graph createExampleGraph() {
@@ -45,6 +56,29 @@ public class GraphExercise {
         Map<Node, Double> shortestDistances = Dijkstra(nodeList, sourceNode);
         Double distanceWeNeed = shortestDistances.get(targetNode);
         return distanceWeNeed.intValue();
+    }
+
+    public List<Object> difficultyIntermediate(Graph graph, String[] startAndEnd) {
+        nodeList = graph.getNodes();
+        Node sourceNode = graph.getNodeByChar(startAndEnd[0]);
+        Node targetNode = graph.getNodeByChar(startAndEnd[1]);
+        Map<Node, Double> shortestDistances = Dijkstra2(nodeList, sourceNode);
+        Double distanceWeNeed = shortestDistances.get(targetNode);
+        Integer distanceWeNeedInt = distanceWeNeed.intValue();
+
+        StringBuilder sb = new StringBuilder();
+
+        Node currentNode = targetNode;
+        while (currentNode.getPathFrom() != null) {
+            sb.insert(0, "," + currentNode.getCharName());
+            currentNode = currentNode.getPathFrom();
+        }
+        sb.delete(0, 1);
+
+        String nodesTravelled = sb.toString();
+
+        List<Object> outputs = Arrays.asList(nodesTravelled, distanceWeNeedInt);
+        return outputs;
     }
 
     public Map<Node, Double> Dijkstra (List<Node> nodeList, Node sourceNode) {
@@ -69,6 +103,41 @@ public class GraphExercise {
                 Double newValue = distances.get(smallest) + smallest.getDistance(neighbour);
                 if (newValue < distances.get(neighbour)) {
                     distances.put(neighbour, newValue);
+                }
+            }
+        }
+
+        // // for printing out distances
+        // for (Map.Entry<Node, Double> entry : distances.entrySet()) {
+        //     System.out.println(entry.getKey().getId() + " " +  entry.getValue());
+        // }
+        
+        return distances;
+    }
+
+    public Map<Node, Double> Dijkstra2 (List<Node> nodeList, Node sourceNode) {
+        Set<Node> usedNodes = new HashSet<>();
+        Map<Node, Double> distances = new HashMap<>();
+
+        for (Node node : nodeList) {
+            if (node.equals(sourceNode)) {
+                distances.put(node, 0.0);
+            } else {
+                distances.put(node, Double.POSITIVE_INFINITY);
+            }
+        }
+
+        while (nodeList.size() > 0) {
+            Node smallest = getSmallest(nodeList, usedNodes, distances);
+            nodeList.remove(smallest);
+            usedNodes.add(smallest);
+
+            Map<Node, Integer> neighbours = smallest.getDistances();
+            for (Node neighbour : neighbours.keySet()) {
+                Double newValue = distances.get(smallest) + smallest.getDistance(neighbour);
+                if (newValue < distances.get(neighbour)) {
+                    distances.put(neighbour, newValue);
+                    neighbour.setPathFrom(smallest);
                 }
             }
         }

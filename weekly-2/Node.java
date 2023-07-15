@@ -6,6 +6,7 @@ public class Node {
     private String charName;
     private int id;
     private Map<Node, Integer> distances = new HashMap<>();
+    private Node pathFrom = null;
 
     public Node(int id) {
         this.id = id;
@@ -34,6 +35,14 @@ public class Node {
         return distances.get(node);
     }
 
+    public Node getPathFrom() {
+        return pathFrom;
+    }
+
+    public void setPathFrom(Node pathFrom) {
+        this.pathFrom = pathFrom;
+    }
+
     public void addNodeDistance(Node otherNode, int distance) {
         this.distances.put(otherNode, distance);
     }
@@ -55,7 +64,7 @@ public class Node {
 
     public String toString() {
         StringBuilder output = new StringBuilder();
-        output.append(String.valueOf(this.id) + " -> [");
+        output.append(String.valueOf(this.charName) + " -> [");
         
         for (Integer distance : distances.values()) {
             output.append(String.valueOf(distance) + ", ");
