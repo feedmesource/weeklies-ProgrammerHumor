@@ -4,7 +4,7 @@ Welcome to the repository of my submissions in **r/ProgrammerHumor Weeklies**! 
 
 # About
 
-This was an event organized by [r/ProgrammerHumor subreddit](https://www.reddit.com/r/ProgrammerHumor/) in July 2023 for fun coding challenges (event info is in their [Discord](https://discord.gg/rph)). I submitted the first two challenges.
+This was an event organized by [r/ProgrammerHumor](https://www.reddit.com/r/ProgrammerHumor/) subreddit in July 2023 for fun coding challenges (event info is in their [Discord](https://discord.gg/rph)). I submitted the first two challenges.
 
 # Submissions info
 
@@ -19,7 +19,7 @@ This was an event organized by [r/ProgrammerHumor subreddit](https://www.reddit.
 It was said to avoid **IF** statements. üòè 
 So I did, by using ternary operations instead of most "if"-s.
 
-## Weekly 2 - "": 
+## Weekly 2 - "Graph": 
 
 *Language:* Java
 
